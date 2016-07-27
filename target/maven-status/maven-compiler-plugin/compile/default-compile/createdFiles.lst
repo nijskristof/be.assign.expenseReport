@@ -1,0 +1,10 @@
+be\assign\expenseReport\dao\UserDaoImpl$1.class
+be\assign\expenseReport\dao\UserDaoImpl.class
+be\assign\expenseReport\model\User.class
+be\assign\expenseReport\config\MvcConfiguration.class
+be\assign\expenseReport\dao\UserDao.class
+be\assign\expenseReport\model\ExpenseDetail.class
+be\assign\expenseReport\model\UserRole.class
+be\assign\expenseReport\controller\UserController.class
+be\assign\expenseReport\dao\UserDaoImpl$2.class
+be\assign\expenseReport\model\File.class
