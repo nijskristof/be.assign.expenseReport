@@ -2,21 +2,33 @@ package be.assign.expenseReport.model;
 
 import java.util.List;
 
-public class User {
+import javax.persistence.*;
 
+public class User {
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private long id;
+	@Column(name="FIRST_NAME")
 	private String firstName;
+	@Column(name="LAST_NAME")
 	private String lastName;
+	@Column(name="EMAIL")
 	private String email;
+	@Column(name="NATIONALIDNUMBER")
 	private String nationalIdNumber;
+	@Column(name="BANK_ACCOUNT")
 	private String account;
+	@ManyToOne
+	@JoinColumn(name="USERROLE_ID")
 	private UserRole userRole;
+	@OneToMany(mappedBy="FILE_ID")
 	private List<File> file;
 
 	public User() {
 	}
 
-	public User(String firstName, String LastName){
+	public User(String firstName, String lastName){
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}

@@ -1,23 +1,36 @@
 package be.assign.expenseReport.model;
 
+import java.util.Set;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "userrole")
 public class UserRole {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "USERROLE_ID")
 	private long id;
-	private User user;
+
+	@OneToMany(mappedBy = "user")
+	private Set<User> users;
+
+	@Column(name = "ROLE")
 	private String role;
 
 	public UserRole() {
 
 	}
 
-	public UserRole(User user, String role) {
-		this.user = user;
+	public UserRole(Set<User> users, String role) {
+		this.users = users;
 		this.role = role;
 	}
 
-	public UserRole(Long id, User user, String role) {
+	public UserRole(Long id, Set<User> users, String role) {
 		this.id = id;
-		this.user = user;
+		this.users = users;
 		this.role = role;
 	}
 
@@ -29,12 +42,12 @@ public class UserRole {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public String getRole() {

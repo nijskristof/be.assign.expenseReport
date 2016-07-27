@@ -60,6 +60,7 @@ public class UserDaoImpl implements UserDao {
 				aUser.setEmail(rs.getString("email"));
 				aUser.setAccount(rs.getString("account"));
 				aUser.setNationalIdNumber(rs.getString("nationalIdNumber"));
+				aUser.setUserRole(userRole);
 				return aUser;
 			}
 		});

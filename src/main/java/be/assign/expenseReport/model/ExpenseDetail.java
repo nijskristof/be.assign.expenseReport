@@ -2,17 +2,30 @@ package be.assign.expenseReport.model;
 
 import java.util.Calendar;
 
-import javax.persistence.Column;
+import javax.persistence.*;
+
 
 public class ExpenseDetail {
+	@Id
+	@GeneratedValue
+	@Column(name="DETAILS_ID")
 	private long id;
+	@ManyToOne
+	@JoinColumn(name="FILE_ID")
 	private File file;
+	@Column(name="DESCRIPTION")
 	private String description;
+	@Column(name="DATE")
 	private Calendar date;
+	@Column(name="SUBSISTENCE_COSTS")
 	private Double subsistenceCosts;
+	@Column(name="RESTAURANT_COSTS")
 	private Double restaurantCosts;
+	@Column(name="TRANSPORT_COSTS")
 	private Double transportCosts;
+	@Column(name="PARIKING_COSTS")
 	private Double parkingCosts;
+	@Column(name="OTHER_COSTS")
 	private Double otherCosts;
 
 	public ExpenseDetail() {

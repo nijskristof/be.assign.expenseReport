@@ -1,14 +1,27 @@
 package be.assign.expenseReport.model;
 
 import java.util.Calendar;
+import java.util.Set;
+
+import javax.persistence.*;
 
 public class File {
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private long id;
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
 	private User user;
+	@Column(name="MONTH")
 	private Calendar month;
+	@Column(name="YEAR")
 	private Calendar year;
+	@Column(name="APPROVAL")
 	private boolean approval;
-		
+	@OneToMany(mappedBy="details")
+	private Set<ExpenseDetail> details;	
+	
 	public File(){
 		
 	}

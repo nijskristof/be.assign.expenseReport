@@ -27,14 +27,13 @@ public class UserController  {
 	    return model;
 	}
 	
-	@RequestMapping(value = "/selectContact", method = RequestMethod.GET)
-	public ModelAndView editContact(HttpServletRequest request) {
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	public ModelAndView getUser(HttpServletRequest request) {
 	    int userId = Integer.parseInt(request.getParameter("id"));
 	    User user = userDao.getUser(userId);
 	    ModelAndView model = new ModelAndView("UserForm");
 	    model.addObject("user", user);
-	 
+	    System.out.println(user);
 	    return model;
-	}
-	
+	}	
 }
