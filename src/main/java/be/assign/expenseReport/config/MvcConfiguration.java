@@ -12,8 +12,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import be.assign.expenseReport.dao.UserDao;
-import be.assign.expenseReport.dao.UserDaoImpl;
+import be.assign.expenseReport.services.UserDao;
+import be.assign.expenseReport.services.UserServiceImpl;
 
 @Configuration
 @ComponentScan(basePackages="be.assign.expenseReport")
@@ -43,7 +43,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
    }
    @Bean 
    public UserDao getUserDAO() {
-       return new UserDaoImpl(getDataSource());
+       return new UserServiceImpl(getDataSource());
    }
 
 }

@@ -25,7 +25,12 @@ public class File {
 	public File(){
 		
 	}
-
+	
+	public File(long id){
+		super();
+		this.id = id;
+	}
+	
 	public File(long id, User user, Calendar month, Calendar year, boolean approval) {
 		super();
 		this.id = id;

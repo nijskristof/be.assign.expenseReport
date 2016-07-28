@@ -12,10 +12,8 @@ public class UserRole {
 	@GeneratedValue
 	@Column(name = "USERROLE_ID")
 	private long id;
-
 	@OneToMany(mappedBy = "user")
 	private Set<User> users;
-
 	@Column(name = "ROLE")
 	private String role;
 
