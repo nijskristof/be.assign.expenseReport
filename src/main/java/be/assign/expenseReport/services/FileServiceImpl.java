@@ -30,14 +30,9 @@ public class FileServiceImpl implements FileService {
 		return file;
 	}
 
-	public File getFilesByUser(long userId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = em.find(File.class, userId);
-		tx.commit();
-		em.close();
-		return file;
+	public List<File> getFilesByUser(long userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -46,23 +41,53 @@ public class FileServiceImpl implements FileService {
 		return null;
 	}
 
-	public File createFile(File file, long userId, Calendar month, Calendar year) {
+	public File createFile(long userId, Calendar month, Calendar year) {
 		EntityManager em = emf.createEntityManager();
-		File newFile = new File(file.getId());
+		File file = new File();
 		UserServiceImpl user = new UserServiceImpl();
-		newFile.setUser(user.getUser(userId));
-		newFile.setMonth(month);
-		newFile.setYear(year);
-		em.persist(newFile);
-		return newFile;
+		file.setUser(user.getUser(userId));
+		file.setMonth(month);
+		file.setYear(year);
+		em.persist(file);
+		return file;
+	}
+	
+	public File editFile(long fileId, Calendar month, Calendar year) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		File file = em.find(File.class, fileId);
+		file.setMonth(month);
+		file.setYear(year);
+		tx.commit();
+		em.close();
+		return file;
 	}
 
+	public File approveFile(long fileId, boolean approval) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		File file = em.find(File.class, fileId);
+		file.setApproval(approval);
+		tx.commit();
+		em.close();
+		return file;
+	}
+	
 	public void RemoveFile(long fileId) {
 		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		File file = getFileById(fileId);
 		if (file != null) {
 			em.remove(file);
 		}
+		tx.commit();
+		em.close();
 	}
+
+
+
 
 }

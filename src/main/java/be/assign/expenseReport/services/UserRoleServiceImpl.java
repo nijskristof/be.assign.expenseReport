@@ -17,11 +17,22 @@ public class UserRoleServiceImpl implements UserRoleService {
 		this.emf = emf;
 	}
 
-	public UserRole getUserRole(int userRoleId) {
+	public UserRole getUserRole(long userRoleId) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		UserRole userRole = em.find(UserRole.class, userRoleId);
+		tx.commit();
+		em.close();
+		return userRole;
+	}
+
+	@Override
+	public UserRole getUserRoleByUserId(Long userId) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		UserRole userRole = em.find(UserRole.class, userId);
 		tx.commit();
 		em.close();
 		return userRole;

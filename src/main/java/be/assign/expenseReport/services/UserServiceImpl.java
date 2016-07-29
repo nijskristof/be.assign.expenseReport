@@ -31,11 +31,26 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	//TODO search how to import multiple objects
 	public List<User> listUsers() {
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createQuery("SELECT u FROM User u");
 		return (List<User>) query.getResultList();
 	}
 
+	public User getUserByEmail(String email) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		User user = em.find(User.class, email);
+		tx.commit();
+		em.close();
+		return user;
+	}
 
+	//TODO search how to import object with multiple attributes
+	public User getUserByName(String firstName, String lastName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
