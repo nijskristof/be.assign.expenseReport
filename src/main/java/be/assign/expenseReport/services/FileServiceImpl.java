@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Service;
 
 import be.assign.expenseReport.model.File;
@@ -31,24 +33,31 @@ public class FileServiceImpl implements FileService {
 	}
 
 	public List<File> getFilesByUser(long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Query query = em.createQuery("select f from FILE f where f.USER_ID = :userId");
+		tx.commit();
+		em.close();
+		return query.setParameter("userId", userId).getResultList();
 	}
-
-	@Override
+	
 	public List<File> getFilesByDate(Calendar month, Calendar year) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public File createFile(long userId, Calendar month, Calendar year) {
 		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		File file = new File();
 		UserServiceImpl user = new UserServiceImpl();
 		file.setUser(user.getUser(userId));
 		file.setMonth(month);
 		file.setYear(year);
 		em.persist(file);
+		tx.commit();
+		em.close();
 		return file;
 	}
 	

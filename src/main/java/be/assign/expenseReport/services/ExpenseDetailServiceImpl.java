@@ -49,6 +49,8 @@ public class ExpenseDetailServiceImpl implements ExpenseDetailService {
 	public ExpenseDetail createExpenseDetail(long fileId, String description, Calendar date, double subsistenceCosts,
 			double restaurantCosts, double transportCosts, double parkingCosts, double otherCosts) {
 		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		FileServiceImpl fsi = new FileServiceImpl();
 		ExpenseDetail detail = new ExpenseDetail();
 		detail.setFile(fsi.getFileById(fileId));
@@ -60,6 +62,8 @@ public class ExpenseDetailServiceImpl implements ExpenseDetailService {
 		detail.setParkingCosts(parkingCosts);
 		detail.setOtherCosts(otherCosts);
 		em.persist(detail);
+		tx.commit();
+		em.close();
 		return detail;
 	}
 
@@ -67,6 +71,8 @@ public class ExpenseDetailServiceImpl implements ExpenseDetailService {
 			double subsistenceCosts, double restaurantCosts, double transportCosts, double parkingCosts,
 			double otherCosts) {
 		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		ExpenseDetail detail = em.find(ExpenseDetail.class, expenseDetailId);
 		FileServiceImpl fsi = new FileServiceImpl();
 		if (detail != null) {
@@ -79,16 +85,21 @@ public class ExpenseDetailServiceImpl implements ExpenseDetailService {
 			detail.setParkingCosts(parkingCosts);
 			detail.setOtherCosts(otherCosts);
 		}
+		tx.commit();
+		em.close();
 		return detail;
 	}
 
 	public void removeExpenseDetail(long expenseDetailId) {
 		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		ExpenseDetail detail = getExpenseDetailById(expenseDetailId);
 		if (detail != null) {
 			em.remove(detail);
 		}
-
+		tx.commit();
+		em.close();
 	}
 
 }

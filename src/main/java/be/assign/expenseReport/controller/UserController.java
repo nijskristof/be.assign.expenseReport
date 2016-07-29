@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.assign.expenseReport.model.User;
-import be.assign.expenseReport.services.UserDao;
+import be.assign.expenseReport.services.UserService;
 
 public class UserController  {
 	
 	@Autowired
-	private UserDao userDao;
+	private UserService userService;
 	
 	@RequestMapping(value="/")
 	public ModelAndView listUser(ModelAndView model) throws IOException{
-	    List<User> listUser = userDao.list();
+	    List<User> listUser = userService.listUsers();
 	    model.addObject("listUser", listUser);
 	    model.setViewName("user");
 	 
@@ -30,7 +30,7 @@ public class UserController  {
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public ModelAndView getUser(HttpServletRequest request) {
 	    int userId = Integer.parseInt(request.getParameter("id"));
-	    User user = userDao.getUser(userId);
+	    User user = userService.getUser(userId);
 	    ModelAndView model = new ModelAndView("UserForm");
 	    model.addObject("user", user);
 	    System.out.println(user);
