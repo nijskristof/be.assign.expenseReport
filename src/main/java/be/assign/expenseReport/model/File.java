@@ -13,10 +13,8 @@ public class File {
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private User user;
-	@Column(name="MONTH")
-	private Calendar month;
-	@Column(name="YEAR")
-	private Calendar year;
+	@Column(name="DATE")
+	private Calendar date;
 	@Column(name="APPROVAL")
 	private boolean approval;
 	@OneToMany(mappedBy="details")
@@ -35,8 +33,7 @@ public class File {
 		super();
 		this.id = id;
 		this.user = user;
-		this.month = month;
-		this.year = year;
+		this.date = date;
 		this.approval = approval;
 	}
 
@@ -56,20 +53,12 @@ public class File {
 		this.user = user;
 	}
 
-	public Calendar getMonth() {
-		return month;
+	public Calendar getDate() {
+		return date;
 	}
 
-	public void setMonth(Calendar month) {
-		this.month = month;
-	}
-
-	public Calendar getYear() {
-		return year;
-	}
-
-	public void setYear(Calendar year) {
-		this.year = year;
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 
 	public boolean isApproval() {

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,17 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 import be.assign.expenseReport.model.User;
 import be.assign.expenseReport.services.UserService;
 
+@Controller
 public class UserController  {
 	
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/getAllUsers", method = RequestMethod.GET)
 	public ModelAndView listUser(ModelAndView model) throws IOException{
-	    List<User> listUser = userService.listUsers();
-	    model.addObject("listUser", listUser);
-	    model.setViewName("user");
-	 
+	    List<User> listUsers = userService.listUsers();
+	    model.addObject("listUsers", listUsers);
+	    model.setViewName("users");
 	    return model;
 	}
 	
@@ -33,7 +34,8 @@ public class UserController  {
 	    User user = userService.getUser(userId);
 	    ModelAndView model = new ModelAndView("UserForm");
 	    model.addObject("user", user);
-	    System.out.println(user);
 	    return model;
 	}	
+	
+
 }

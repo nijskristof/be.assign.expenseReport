@@ -41,33 +41,32 @@ public class FileServiceImpl implements FileService {
 		em.close();
 		return query.setParameter("userId", userId).getResultList();
 	}
-	
-	public List<File> getFilesByDate(Calendar month, Calendar year) {
+
+	//TODO still create this methode 
+	public List<File> getFilesByDate(Calendar date) {
 		return null;
 	}
 
-	public File createFile(long userId, Calendar month, Calendar year) {
+	public File createFile(long userId, Calendar date) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		File file = new File();
 		UserServiceImpl user = new UserServiceImpl();
 		file.setUser(user.getUser(userId));
-		file.setMonth(month);
-		file.setYear(year);
+		file.setDate(date);
 		em.persist(file);
 		tx.commit();
 		em.close();
 		return file;
 	}
-	
-	public File editFile(long fileId, Calendar month, Calendar year) {
+
+	public File editFile(long fileId, Calendar date) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		File file = em.find(File.class, fileId);
-		file.setMonth(month);
-		file.setYear(year);
+		file.setDate(date);
 		tx.commit();
 		em.close();
 		return file;
@@ -83,7 +82,7 @@ public class FileServiceImpl implements FileService {
 		em.close();
 		return file;
 	}
-	
+
 	public void RemoveFile(long fileId) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -96,7 +95,10 @@ public class FileServiceImpl implements FileService {
 		em.close();
 	}
 
-
-
+	@Override
+	public List<File> getFilesByappoval(Boolean approval) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
