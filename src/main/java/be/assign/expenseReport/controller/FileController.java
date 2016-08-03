@@ -1,6 +1,5 @@
 package be.assign.expenseReport.controller;
 
-import java.time.Month;
 import java.util.Calendar;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class FileController {
 		return model;	
 	}
 	
-	@RequestMapping(value="getFilesByDate", method = RequestMethod.GET)
+	@RequestMapping(value="/getFilesByDate", method = RequestMethod.GET)
 	public ModelAndView getFilesByDate(HttpServletRequest request){
 		Calendar date = Calendar.getInstance();
 		//TODO Date is static at the moment, need to be imported out of the view
