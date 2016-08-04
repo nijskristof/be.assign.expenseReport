@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import be.assign.expenseReport.Dao.UserDao;
+import be.assign.expenseReport.dao.UserDao;
 import be.assign.expenseReport.model.User;
 
 @Service("userService")

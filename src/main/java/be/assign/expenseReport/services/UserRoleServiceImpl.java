@@ -2,7 +2,7 @@ package be.assign.expenseReport.services;
 
 import org.springframework.stereotype.Service;
 
-import be.assign.expenseReport.Dao.UserRoleDao;
+import be.assign.expenseReport.dao.UserRoleDao;
 import be.assign.expenseReport.model.UserRole;
 
 @Service("userRoleService")

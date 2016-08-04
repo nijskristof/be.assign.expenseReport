@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import be.assign.expenseReport.Dao.ExpenseDetailDao;
+import be.assign.expenseReport.dao.ExpenseDetailDao;
 import be.assign.expenseReport.model.ExpenseDetail;
 
 @Service("ExpenseDetailService")
