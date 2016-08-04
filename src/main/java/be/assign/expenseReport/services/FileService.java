@@ -10,9 +10,9 @@ public interface FileService {
 	public List<File> getFilesByUser(long userId);
 	public List<File> getFilesByDate(Calendar date);
 	public List<File> getFilesByappoval(Boolean approval);
-	public File createFile(long userId, Calendar date);
-	public File editFile(long fileId, Calendar date);
-	public File approveFile(long fileId, boolean approval);
+	public void createFile(File file);
+	public void editFile(File file);
+	public void approveFile(File file);
 	public void RemoveFile(long fileId);
 	
 }

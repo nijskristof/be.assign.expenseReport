@@ -1,41 +1,24 @@
 package be.assign.expenseReport.services;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUnit;
 import org.springframework.stereotype.Service;
 
+import be.assign.expenseReport.Dao.UserRoleDao;
 import be.assign.expenseReport.model.UserRole;
 
 @Service("userRoleService")
 public class UserRoleServiceImpl implements UserRoleService {
-	private EntityManagerFactory emf;
 
-	@PersistenceUnit
-	public void setEntityManagerFactory(EntityManagerFactory emf) {
-		this.emf = emf;
+	private UserRoleDao userRoleDao;
+	public void setUserRoleDao(UserRoleDao userRoleDao){
+		this.userRoleDao = userRoleDao;
 	}
-
-	public UserRole getUserRole(long userRoleId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		UserRole userRole = em.find(UserRole.class, userRoleId);
-		tx.commit();
-		em.close();
-		return userRole;
+	public UserRole getUserRoleById(long userRoleId) {
+		return this.userRoleDao.getUserRoleById(userRoleId);
 	}
 
 	@Override
 	public UserRole getUserRoleByUserId(Long userId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		UserRole userRole = em.find(UserRole.class, userId);
-		tx.commit();
-		em.close();
-		return userRole;
+		return this.userRoleDao.getUserRoleByUserId(userId);
 	}
 
 }

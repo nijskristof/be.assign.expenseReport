@@ -3,102 +3,66 @@ package be.assign.expenseReport.services;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import be.assign.expenseReport.Dao.FileDao;
 import be.assign.expenseReport.model.File;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
-	private EntityManagerFactory emf;
+	private FileDao fileDao;
 
-	@PersistenceUnit
-	public void setEntityManagerFactory(EntityManagerFactory emf) {
-		this.emf = emf;
+	public void setFileDao(FileDao fileDao) {
+		this.fileDao = fileDao;
 	}
 
+	@Transactional
+	@Override
 	public File getFileById(long fileId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = em.find(File.class, fileId);
-		tx.commit();
-		em.close();
-		return file;
+		return this.fileDao.getFileById(fileId);
 	}
 
+	@Transactional
+	@Override
 	public List<File> getFilesByUser(long userId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		Query query = em.createQuery("select f from FILE f where f.USER_ID = :userId");
-		tx.commit();
-		em.close();
-		return query.setParameter("userId", userId).getResultList();
+		return this.fileDao.getFilesByUser(userId);
 	}
 
-	//TODO still create this methode 
+	@Transactional
+	@Override
 	public List<File> getFilesByDate(Calendar date) {
-		return null;
+		return this.fileDao.getFilesByDate(date);
 	}
 
-	public File createFile(long userId, Calendar date) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = new File();
-		UserServiceImpl user = new UserServiceImpl();
-		file.setUser(user.getUser(userId));
-		file.setDate(date);
-		em.persist(file);
-		tx.commit();
-		em.close();
-		return file;
-	}
-
-	public File editFile(long fileId, Calendar date) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = em.find(File.class, fileId);
-		file.setDate(date);
-		tx.commit();
-		em.close();
-		return file;
-	}
-
-	public File approveFile(long fileId, boolean approval) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = em.find(File.class, fileId);
-		file.setApproval(approval);
-		tx.commit();
-		em.close();
-		return file;
-	}
-
-	public void RemoveFile(long fileId) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		File file = getFileById(fileId);
-		if (file != null) {
-			em.remove(file);
-		}
-		tx.commit();
-		em.close();
-	}
-
+	@Transactional
 	@Override
 	public List<File> getFilesByappoval(Boolean approval) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.fileDao.getFilesByappoval(approval);
+	}
+
+	@Transactional
+	@Override
+	public void createFile(File file) {
+		this.fileDao.createFile(file);
+	}
+
+	@Transactional
+	@Override
+	public void editFile(File file) {
+		this.fileDao.editFile(file);
+	}
+
+	@Transactional
+	@Override
+	public void approveFile(File file) {
+		this.fileDao.approveFile(file);
+	}
+
+	@Transactional
+	@Override
+	public void RemoveFile(long fileId) {
+		this.fileDao.RemoveFile(fileId);
 	}
 
 }
