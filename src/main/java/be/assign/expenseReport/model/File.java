@@ -68,5 +68,11 @@ public class File {
 	public void setApproval(boolean approval) {
 		this.approval = approval;
 	}
+
+	@Override
+	public String toString() {
+		return "File [id=" + id + ", user=" + user + ", date=" + date + ", approval=" + approval + ", details="
+				+ details + "]";
+	}
 	
 }

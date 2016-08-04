@@ -118,4 +118,12 @@ public class ExpenseDetail {
 		this.otherCosts = otherCosts;
 	}
 
+	@Override
+	public String toString() {
+		return "ExpenseDetail [id=" + id + ", file=" + file + ", description=" + description + ", date=" + date
+				+ ", subsistenceCosts=" + subsistenceCosts + ", restaurantCosts=" + restaurantCosts
+				+ ", transportCosts=" + transportCosts + ", parkingCosts=" + parkingCosts + ", otherCosts=" + otherCosts
+				+ "]";
+	}
+
 }

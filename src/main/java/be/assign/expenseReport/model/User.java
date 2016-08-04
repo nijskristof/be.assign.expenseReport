@@ -116,4 +116,11 @@ public class User {
 		this.file = file;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", nationalIdNumber=" + nationalIdNumber + ", account=" + account + ", userRole=" + userRole
+				+ ", file=" + file + "]";
+	}
+
 }
