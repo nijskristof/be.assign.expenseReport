@@ -17,55 +17,56 @@ import be.assign.expenseReport.services.FileService;
 @Controller
 public class FileController {
 	private FileService fileService;
-	
+
 	@Autowired
 	@Qualifier(value = "FileService")
-	public void setFilesService(FileService fs){
+	public void setFilesService(FileService fs) {
 		this.fileService = fs;
 	}
 
 	@RequestMapping(value = "/files/date", method = RequestMethod.GET)
-	public String listFilesByDate(Model model, Calendar date){
+	public String listFilesByDate(Model model, Calendar date) {
 		model.addAttribute("file", new File());
 		model.addAttribute("files", fileService.getFilesByDate(date));
 		return "file";
 	}
-	
+
 	@RequestMapping(value = "/files/user", method = RequestMethod.GET)
-	public String listFilesByUser(Model model, long userId){
+	public String listFilesByUser(Model model, long userId) {
 		model.addAttribute("file", new File());
 		model.addAttribute("files", fileService.getFilesByUser(userId));
 		return "file";
 	}
-	
+
 	@RequestMapping(value = "/files/approval", method = RequestMethod.GET)
-	public String listFilesByApproval(Model model, boolean approval){
+	public String listFilesByApproval(Model model, boolean approval) {
 		model.addAttribute("file", new File());
 		model.addAttribute("files", fileService.getFilesByappoval(approval));
 		return "file";
 	}
-	
+
 	@RequestMapping(value = "/files/add", method = RequestMethod.POST)
-	public String createFile(@ModelAttribute("file") File f){
-		if(f.getId()==0){
+	public String createFile(@ModelAttribute("file") File f) {
+		if (f.getId() == 0) {
 			this.fileService.createFile(f);
-		}else{
+		} else {
 			this.fileService.editFile(f);
 		}
 		return "redirect:/files";
 	}
-	
-	@RequestMapping("/files/remoce/{fileId}")
-	public String removeFile(@PathVariable("fileId")long fileId){
+
+	@RequestMapping("/files/remove/{fileId}")
+	public String removeFile(@PathVariable("fileId") long fileId) {
 		this.fileService.RemoveFile(fileId);
 		return "redirect:/files";
 	}
-	
-	//TODO create a getfiles in service and dao
-	public String editFile(@PathVariable("fileId")long fileId, Model model){
+
+	// TODO create a getfiles in service and dao
+	public String editFile(@PathVariable("fileId") long fileId, Model model) {
 		model.addAttribute("file", this.fileService.getFileById(fileId));
-//		model.addAttribute("files", this.fileService.get)
+		// model.addAttribute("files", this.fileService.get)
 		return "file";
 	}
+
 	
 }
